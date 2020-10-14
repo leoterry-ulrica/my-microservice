@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: user-cloud-consumer
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 52.82.78.179:30005
+        namespace: id-tangram
+        enabled: true
+server:
+  port: 8001

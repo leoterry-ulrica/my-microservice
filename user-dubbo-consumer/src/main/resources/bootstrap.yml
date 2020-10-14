@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: user-dubbo-consumer
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 52.82.78.179:30005
+        namespace: id-tangram
+        enabled: true
+server:
+  port: 9001
+#Dubbo配置
+dubbo:
+  scan:
+    base-packages: com.dist.xdata
+    #Base packages to scan Dubbo Component: @org.apache.dubbo.config.annotation.Service
+    #即扫码远程接口实现类
+  consumer:
+    #作为消费者时启动不检查
+    check: false
+    #是否缺省泛化接口，默认false
+    generic: false
+  protocol:
+    #使用dubbo协议
+    name: dubbo
+    #port: ${random.int[25000,65000]}
+    port: 24682
+    #长连接心跳间隔，用于帮助检测连接是否已经端口
+    heartbeat: 3000
+  registry:
+    #挂载到 Spring Cloud 注册中心
+    address: spring-cloud://${spring.cloud.nacos.discovery.server-addr}
+  cloud:
+    #作为消费者订阅的服务，订阅多应用，使用 "," 分割
+    subscribed-services: user-dubbo-provider
